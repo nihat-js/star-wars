@@ -1,3 +1,4 @@
+const moviesDiv = document.getElementById("movies");
 
 function getMovies() {
   return new Promise((resolve, reject) => {
@@ -17,7 +18,7 @@ function getCharacters(movie, movieDiv) {
       .then((data) => {
 
         let li = document.createElement('li')
-        li.textContent = ` Name : ${data.name} Height : ${data.height} `
+        li.textContent = `${data.name} height: ${data.height} `
 
         movieDiv.querySelector(".loading").style.display = "none"
         movieDiv.querySelector("ul").appendChild(li)
@@ -26,7 +27,6 @@ function getCharacters(movie, movieDiv) {
   })
 }
 
-const moviesContainer = document.getElementById("movies");
 
 async function main() {
   let movies = await getMovies()
@@ -51,33 +51,11 @@ async function main() {
     movieDiv.appendChild(title);
     movieDiv.appendChild(openingCrawl);
     movieDiv.appendChild(charactersList);
-    moviesContainer.appendChild(movieDiv);
+    moviesDiv.appendChild(movieDiv);
 
 
     let characters = getCharacters(movie, movieDiv)
-    // Promise.allSettled(characters).then(arr => {
-
-    //   arr.forEach( (async el => {
-    //     let data = await el.value.json()
-    //     console.log(data)
-    //     // charactersList.innerHTML += el.name
-    //   }))
-    // })
-
-    //   Promise.all(movie.characters.map(characterUrl => fetch(characterUrl).then(response => response.json())))
-    //     .then(charactersData => {
-    //       // Remove loading icon and display characters' names
-    //       charactersList.innerHTML = ""; // Remove loading icon
-    //       charactersData.forEach(characterData => {
-    //         const characterItem = document.createElement("li");
-    //         characterItem.textContent = characterData.name;
-    //         charactersList.appendChild(characterItem);
-    //       });
-    //     })
-    //     .catch(error => {
-    //       console.error("Error loading characters:", error);
-    //       charactersList.innerHTML = "Error loading characters.";
-    //     });
+   
   })
 }
 
